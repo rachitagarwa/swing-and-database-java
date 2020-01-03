@@ -1,0 +1,81 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package sycs18;
+
+import java.awt.Container;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.*;
+import java.sql.*;
+
+class UserFrame extends JFrame implements ActionListener{
+    
+    JTextField uYourNameText;
+    JPasswordField uYourPasswordField;
+    JButton btn;
+       
+    UserFrame(){
+        
+        setTitle("Sign Up Form");
+        JPanel c = new JPanel();
+        this.add(c);
+        
+        JLabel uYourName = new JLabel("Enter the User Name");
+        uYourNameText = new JTextField(25);
+        c.add(uYourName);
+        c.add(uYourNameText);
+       
+        setBounds(20,20,400,650);
+        setVisible(true);
+        setResizable(true);
+        
+    }
+     
+    
+    public void actionPerformed(ActionEvent e){
+    System.out.println("Action performed by " + e.getSource());
+     String name_value = uYourNameText.getText();
+    if (e.getSource() == btn)
+    {
+        System.out.println("The user inputted username:" + uYourNameText.getText()  +
+                ", password:" + uYourPasswordField.getText());
+    }
+}
+    
+}
+
+
+public class SwingsExample {
+    public static void main (String args[]){
+        
+  
+        String user = "root";
+       String pass = "scott" ; 
+        
+       try{
+          
+           Class.forName("com.mysql.jdbc.Driver");
+          Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306",user,pass);
+          System.out.println("Connected Successfully");
+          
+          
+          Statement stmt = con.createStatement();
+          stmt.execute("insert into swingexample.users values ('');");
+          System.out.println("Successfully Inserted");
+ 
+       }catch(Exception e){
+           e.printStackTrace();}
+
+        
+        
+        UserFrame demo= new UserFrame();
+        
+  
+    
+
+   }
+}
+
